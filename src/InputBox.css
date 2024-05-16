@@ -1,0 +1,26 @@
+/* Style for the input box */
+.input-box {
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Border color */
+    font-size: 16px; /* Font size */
+    width: 200px; /* Input box width */
+    outline: none; /* Remove default focus outline */
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  /* Style for input box on focus */
+  .input-box:focus {
+    border-color: #007bff; /* Change border color on focus */
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+.input-text {
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}

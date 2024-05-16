@@ -1,6 +1,6 @@
 import React from 'react';
 import '/Users/maanitmalhan/Documents/IAC_Center/recc-manager/src/Headers.css'; 
-//import GoogleFontLoader from 'react-google-font-loader';
+
 
 
 export default function Header() {
