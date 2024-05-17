@@ -9,12 +9,5 @@ function RecButton(){
     );
 }
 
-function FindButton(){
-    return(
-        <div>
-        <button className='rounded-button' style={{ margin: '10px' }}>Find ARC Code</button>
-        </div>
-    );
-}
+
 export default RecButton;
-export { FindButton };

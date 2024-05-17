@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import '/Users/maanitmalhan/Documents/IAC_Center/recc-manager/src/InputBox.css'; 
+import mappings from './Mappings';
+
+
 export default function InputBox() {
     const [inputValue, setInputValue] = useState('');
+    const [result, setResult] = useState('');
   
+    // Event handler for input change
     const handleChange = (event) => {
-      setInputValue(event.target.value);
+      const value = event.target.value;
+      setInputValue(value);
+  
+      // Match input value to result from mappings
+      setResult(mappings[value] || 'ARC Code not found, Might be too specific or non existent. Please try again.');
     };
   
 
@@ -15,10 +24,12 @@ export default function InputBox() {
           value={inputValue}
           onChange={handleChange}
           placeholder="ARC Code..."
-          step="0.0001"
+          step="0.001"
           style={{ margin: '20px' }}
         />
-        <p className='input-text'>ARC Code Entered: {inputValue}</p>
+        <p className='input-text'>ARC Code Entered: <span className='output-text'>{inputValue}</span></p>
+        <p className='input-text'>Result:  <span className='output-text'>{result}</span></p>
+
       </div>
     );
   }

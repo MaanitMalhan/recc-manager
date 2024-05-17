@@ -13,7 +13,6 @@ function App() {
       <Header />
       <InputBox />
       <RecButton />
-      <FindButton />
     </div>
   );
 }
