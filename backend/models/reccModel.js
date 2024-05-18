@@ -1,3 +1,5 @@
+//FIGURE OUT HOW TO USE ARC CODES AS ID 
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

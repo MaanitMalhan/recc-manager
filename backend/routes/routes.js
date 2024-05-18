@@ -2,6 +2,8 @@ const express = require('express');
 const { createRecc, getRecc, getReccs, deleteRecc, updateRecc} = require('../controllers/reccController');
 
 const router = express.Router();
+
+//FIGURE OUT HOW TO USE ARC CODES AS ID 
 //=========================================================
     //routes
     //GET -> get all files
