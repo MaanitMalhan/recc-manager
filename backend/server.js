@@ -3,7 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const fileRoutes = require('./routes/Routes');
+const reccRoutes = require('./routes/Routes');
 
 //creates express app
 const app = express();
@@ -17,11 +17,12 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use("/api/routes",fileRoutes);
+app.use("/api/reccs",reccRoutes);
 
 //connect to DB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
+        console.log("Connected to mongoDB!");
         //listen for requests
         app.listen(process.env.PORT, () => {
         console.log("Connected to mongoDB and listening on port 4000!");

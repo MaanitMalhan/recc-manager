@@ -14,6 +14,10 @@ const reccSchema = new Schema({
         type: mongoose.Schema.Types.Mixed,
         required: true
     },
+    location: {
+        type: String,
+        required: false
+    },
 }, {timestamps: true});
 
 module.exports = mongoose.model('Recc', reccSchema)
