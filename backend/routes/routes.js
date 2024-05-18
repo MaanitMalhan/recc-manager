@@ -1,4 +1,5 @@
 const express = require('express');
+const Assessment = require('../models/assessmentModel');
 
 const router = express.Router();
 //=========================================================
@@ -20,9 +21,16 @@ router.get('/:id', (req, res) => {
 })
 
 // POST -> upload a file
-router.post('/', (req, res) => {
-    res.json({message: "upload a file"});
-})
+router.post('/', async (req, res) => {
+    const {ARCcode, description} = req.body
+    
+    try {
+      const assessment = await Assessment.create({ARCcode, description})
+      res.status(200).json(assessment)
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  })
 
 //DELETE/:id -> delete a file
 router.delete('/:id', (req, res) => {
