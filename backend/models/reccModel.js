@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const assessmentSchema = new Schema({
+const reccSchema = new Schema({
 
     ARCcode: {
         type: Number,
@@ -14,4 +14,4 @@ const assessmentSchema = new Schema({
     },
 }, {timestamps: true});
 
-module.exports = mongoose.model('Assessment', assessmentSchema)
+module.exports = mongoose.model('Recc', reccSchema)
