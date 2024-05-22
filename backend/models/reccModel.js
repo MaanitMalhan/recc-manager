@@ -9,15 +9,22 @@ const reccSchema = new Schema({
     ARCcode: {
         type: Number,
         required: true
-    },
-    description: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
-    },
-    location: {
+      },
+      description: {
         type: String,
-        required: false
-    },
+        required: true
+      },
+      template: {
+        type: String,
+        required: true
+      },
+      location: {
+        type: String,
+        required: true
+      },
+    
+    
 }, {timestamps: true});
+
 
 module.exports = mongoose.model('Recc', reccSchema)

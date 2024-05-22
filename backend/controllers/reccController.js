@@ -30,10 +30,10 @@ const getRecc = async (req, res) => {
 
 //create a rec
 const createRecc = async (req, res) => {
-    const {ARCcode, description} = req.body
+    const { ARCcode, location, description, template } = req.body
     // add document to DB
     try {
-      const recc = await Recc.create({ARCcode, description})
+      const recc = await Recc.create({ARCcode, location, description, template})
       res.status(200).json(recc)
     } catch (error) {
       res.status(400).json({error: error.message})

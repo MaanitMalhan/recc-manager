@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 
 //components
 import ReccDetails from '../components/ReccDetails';
+import ReccForm from '../components/ReccForm';
 
 const Home = () => {
 
@@ -9,7 +10,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetch("/api/reccs    ");
+            const data = await fetch("/api/reccs");
             const json = await data.json();
 
             if(data.ok){
@@ -25,7 +26,8 @@ const Home = () => {
             {routes && routes.map((recc) => (
                 <ReccDetails key={recc._id} recc={recc} />
 ))}
-          </div>
+           </div>
+          <ReccForm />
         </div>
       )
     }
