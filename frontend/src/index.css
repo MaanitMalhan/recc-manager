@@ -40,7 +40,7 @@ header a {
   gap: 100px;
 }
 .recc-details {
-  background: #fff;
+  background: rgb(255, 255, 255);
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;

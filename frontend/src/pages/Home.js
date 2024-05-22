@@ -1,10 +1,13 @@
 import {useEffect, useState} from 'react';
+import { useReccContext } from '../hooks/useReccContext';
 
 //components
 import ReccDetails from '../components/ReccDetails';
 import ReccForm from '../components/ReccForm';
 
 const Home = () => {
+
+  const { ARCcode, dispatch } = useReccContext();
 
     const [routes, setRoutes] = useState(null);
 
@@ -14,11 +17,11 @@ const Home = () => {
             const json = await data.json();
 
             if(data.ok){
-                setRoutes(json);
+              dispatch({type: 'SET_ARCcode', payload: json});
             }
         }
         fetchData();
-    },[]);
+    },[dispatch]);
 
     return (
         <div className="home">

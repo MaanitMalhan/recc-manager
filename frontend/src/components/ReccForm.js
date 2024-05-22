@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useReccContext } from '../hooks/useReccContext';
 
 const ReccForm = () => {
+    const { dispatch } = useReccContext();
     const [ARCcode, setARCcode] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
@@ -32,6 +34,7 @@ const ReccForm = () => {
             setDescription('');
             setTemplate('');
             console.log('Saved data:', recc); 
+            dispatch({type: 'CREATE_RECC', payload: json});
         }
         }
     
