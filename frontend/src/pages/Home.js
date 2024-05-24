@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect } from 'react';
 import { useReccContext } from '../hooks/useReccContext';
 
 //components
@@ -7,9 +7,7 @@ import ReccForm from '../components/ReccForm';
 
 const Home = () => {
 
-  const { ARCcode, dispatch } = useReccContext();
-
-    const [routes, setRoutes] = useState(null);
+    const {routes, dispatch} = useReccContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +24,8 @@ const Home = () => {
     return (
         <div className="home">
           <div className="reccs">
-            {routes && routes.map((recc) => (
-                <ReccDetails key={recc._id} recc={recc} />
+            {routes && routes.map(recc => (
+                <ReccDetails recc={recc} key={recc._id} />
 ))}
            </div>
           <ReccForm />
