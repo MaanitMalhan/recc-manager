@@ -13,6 +13,10 @@ export const reccReducer = (state, action) => {
             return {
                 routes: [action.payload, ...state.routes]
     }
+        case 'DELETE_RECC':
+            return {
+                routes: state.routes.filter((r)=> r._id !== action.payload._id)
+    }
         default:
             return state;
     }
