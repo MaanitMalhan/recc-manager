@@ -8,6 +8,8 @@ const ReccForm = () => {
     const [description, setDescription] = useState('');
     const [template, setTemplate] = useState('');
     const [error, setError] = useState(null);
+    const [emptyFields, setEmptyFields] = useState([]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +25,11 @@ const ReccForm = () => {
 
         if (!response.ok) {
             setError(json.error);
-            console.log('Saved data:', recc); 
-            
+            setEmptyFields(json.emptyFields);
         }
         if (response.ok) {
             setError(null);
+            setEmptyFields([]);
             console.log("New recommendation added!")
             setARCcode('');
             setLocation('');
@@ -49,6 +51,7 @@ const ReccForm = () => {
                 required
                 onChange={(e) => setARCcode(e.target.value)}
                 value={ARCcode}
+                className={emptyFields.includes('ARCcode') ? 'error' : ''}
             />
 
             <label>Location:</label>
@@ -56,6 +59,7 @@ const ReccForm = () => {
                 type="text"
                 onChange={(e) => setLocation(e.target.value)}
                 value={location}
+                className={emptyFields.includes('location') ? 'error' : ''}
             />
 
             <label>Description:</label>
@@ -64,6 +68,7 @@ const ReccForm = () => {
                 required
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
+                className={emptyFields.includes('description') ? 'error' : ''}
             />
 
             <label>Recommendation Template:</label>
@@ -72,6 +77,7 @@ const ReccForm = () => {
                 required
                 onChange={(e) => setTemplate(e.target.value)}
                 value={template}
+                className={emptyFields.includes('template') ? 'error' : ''}
             />
 
             <button>Submit</button>

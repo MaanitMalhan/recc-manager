@@ -31,6 +31,25 @@ const getRecc = async (req, res) => {
 //create a rec
 const createRecc = async (req, res) => {
     const { ARCcode, location, description, template } = req.body
+    
+    let emptyFields = []
+
+    if(!ARCcode) {
+        emptyFields.push('ARCcode')
+    }
+    if(!location) {
+        emptyFields.push('location')
+    }
+    if(!description) {
+        emptyFields.push('description')
+    }
+    if(!template) {
+        emptyFields.push('template')
+    }
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: `Please fill in the following fields: ${emptyFields.join(', ')}`, emptyFields})
+    }
+
     // add document to DB
     try {
       const recc = await Recc.create({ARCcode, location, description, template})
