@@ -4,6 +4,7 @@ import { useReccContext } from '../hooks/useReccContext';
 //components
 import ReccDetails from '../components/ReccDetails';
 import ReccForm from '../components/ReccForm';
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
 
@@ -29,6 +30,7 @@ const Home = () => {
 ))}
            </div>
           <ReccForm />
+          <SearchBar />
         </div>
       )
     }
