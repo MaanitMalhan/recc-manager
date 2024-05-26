@@ -15,10 +15,14 @@ export default function InputBox() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const value = inputValue;
+        
+        
+        console.log('submit value:', value);
 
         try {
             // Make a GET request to fetch the recommendation by ID
-            const response = await fetch(`/api/reccs/6652af1c1759bb9cc45de4fb`, {
+            const response = await fetch(`/api/reccs/${value}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             });
@@ -48,7 +52,7 @@ export default function InputBox() {
     const handleChange = (event) => {
       const value = event.target.value;
       setInputValue(value);
-  
+      console.log('Input value:', value);
       // Match input value to result from mappings
       setResult(mappings[value] || 'ARC Code not found, Might be too specific or non existent. Please try again.');
     };
@@ -57,7 +61,7 @@ export default function InputBox() {
     return (
       <div className='search-bar'>
         <input className='input-box'
-          type="number"
+          type="string"
           value={inputValue}
           onChange={handleChange}
           placeholder="ARC Code..."
