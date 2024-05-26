@@ -17,18 +17,18 @@ export default function InputBox() {
   
 
     return (
-      <div>
+      <div className='search-bar'>
         <input className='input-box'
           type="number"
           value={inputValue}
           onChange={handleChange}
           placeholder="ARC Code..."
-          step="0.001"
+          step="0.01"
           style={{ margin: '20px' }}
         />
         <p className='input-text'>ARC Code Entered: <span className='output-text'>{inputValue}</span></p>
         <p className='input-text'>Result:  <span className='output-text'>{result}</span></p>
-
+        <button className='input-text'>Submit</button>
       </div>
     );
   }

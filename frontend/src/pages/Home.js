@@ -24,13 +24,13 @@ const Home = () => {
 
     return (
         <div className="home">
+          <SearchBar />
+          <ReccForm />
           <div className="reccs">
-            {routes && routes.map(recc => (
+          {routes && routes.map(recc => (
                 <ReccDetails recc={recc} key={recc._id} />
 ))}
-           </div>
-          <ReccForm />
-          <SearchBar />
+        </div>
         </div>
       )
     }
