@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { json } from 'react-router-dom';
 import mappings from '../script/Mappings';
 
 
@@ -17,9 +18,6 @@ export default function InputBox() {
         e.preventDefault();
         const value = inputValue;
         
-        
-        console.log('submit value:', value);
-
         try {
             // Make a GET request to fetch the recommendation by ID
             const response = await fetch(`/api/reccs/${value}`, {
@@ -27,18 +25,18 @@ export default function InputBox() {
                 headers: {'Content-Type': 'application/json'}
             });
 
-            const json = await response.json();
+            const result = await response.json();
 
             if (!response.ok) {
-                setError(json.error);
+                setError(result.error);
             } else {
                 setError(null);
                 // Set the state with the fetched recommendation details
-                setARCcode(json.ARCcode);
-                setLocation(json.location);
-                setDescription(json.description);
-                setTemplate(json.template);
-                console.log('Fetched data:', json);
+                setARCcode(result.ARCcode);
+                setLocation(result.location);
+                setDescription(result.description);
+                setTemplate(result.template);
+                console.log('Fetched data:', result);
             }
         } catch (error) {
             setError('An error occurred while fetching the recommendation.');
@@ -74,3 +72,4 @@ export default function InputBox() {
       </div>
     );
   }
+
