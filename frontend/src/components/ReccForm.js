@@ -7,6 +7,7 @@ const ReccForm = () => {
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [template, setTemplate] = useState('');
+    const [reportName, setReportName] = useState('');
     const [error, setError] = useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
 
@@ -14,7 +15,7 @@ const ReccForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const recc = {ARCcode, location, description, template};
+        const recc = {ARCcode, location, description, template, reportName};
 
         const response = await fetch('/api/reccs', {
             method: 'POST',
@@ -35,6 +36,7 @@ const ReccForm = () => {
             setLocation('');
             setDescription('');
             setTemplate('');
+            setReportName('');
             console.log('Saved data:', recc); 
             dispatch({type: 'CREATE_RECC', payload: json});
         }
@@ -78,6 +80,15 @@ const ReccForm = () => {
                 onChange={(e) => setTemplate(e.target.value)}
                 value={template}
                 className={emptyFields.includes('template') ? 'error' : ''}
+            />
+
+            <label>Report Name:</label>
+            <input
+                type="text"
+                required
+                onChange={(e) => setReportName(e.target.value)}
+                value={reportName}
+                className={emptyFields.includes('reportName') ? 'error' : ''}
             />
 
             <button>Submit</button>

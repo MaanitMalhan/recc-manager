@@ -22,6 +22,10 @@ const reccSchema = new Schema({
         type: String,
         required: true
       },
+      reportName: {
+        type: String,
+        required: true
+      },
     
     
 }, {timestamps: true});

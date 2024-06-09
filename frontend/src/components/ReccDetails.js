@@ -22,6 +22,7 @@ const ReccDetails = ({ recc }) => {
             <p><strong>Location: </strong>{recc.location}</p>
             <p><strong>Description: </strong>{recc.description}</p>
             <p><strong>Recommendation Template: </strong>{recc.template}</p>
+            <p><strong>Report Name: </strong>{recc.reportName}</p>
             <p><strong>Last Updated: </strong>{formatDistanceToNow(new Date(recc.updatedAt), {addSuffix: true})}</p>
             <span onClick={handleClick} className="material-symbols-outlined">Delete</span>
         </div>
