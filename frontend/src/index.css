@@ -186,3 +186,11 @@ p.input-text {
 button.input-text {
   margin-left: 20px;
 }
+
+.material-symbols-outlined {
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}
+

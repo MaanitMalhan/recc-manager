@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useReccContext } from '../hooks/useReccContext';
 import { json } from 'react-router-dom';
 import mappings from '../script/Mappings';
 
@@ -14,34 +15,11 @@ export default function InputBox() {
     const [description, setDescription] = useState('');
     const [template, setTemplate] = useState('');
 
+    const { dispatch} = useReccContext();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const value = inputValue;
-        
-        try {
-            // Make a GET request to fetch the recommendation by ID
-            const response = await fetch(`/api/reccs/${value}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                setError(result.error);
-            } else {
-                setError(null);
-                // Set the state with the fetched recommendation details
-                setARCcode(result.ARCcode);
-                setLocation(result.location);
-                setDescription(result.description);
-                setTemplate(result.template);
-                console.log('Fetched data:', result);
-            }
-        } catch (error) {
-            setError('An error occurred while fetching the recommendation.');
-            console.error(error);
-        }
+        dispatch({type: 'FILTER_RECCS', payload: inputValue});
     };
 
 

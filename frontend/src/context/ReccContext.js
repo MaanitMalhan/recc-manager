@@ -2,21 +2,46 @@ import { createContext, useReducer } from 'react';
 
 export const ReccContext = createContext();
 
+let initialState = {
+    reccArray: [],
+    filteredReccArray: [],
+}
+
 export const reccReducer = (state, action) => {
 
     switch (action.type){
-        case 'SET_ARCcode':
+        case 'SET_RECCS': 
             return {
-                routes: action.payload
-    }
+                reccArray: action.payload,
+                filteredReccArray: action.payload,
+            }       
         case 'CREATE_RECC':
             return {
-                routes: [action.payload, ...state.routes]
+                reccArray: [action.payload, ...state.reccArray],
+                filteredReccArray: [action.payload, ...state.reccArray],
     }
         case 'DELETE_RECC':
             return {
-                routes: state.routes.filter((r)=> r._id !== action.payload._id)
+                reccArray: state.reccArray.filter((r)=> r._id !== action.payload._id),
+                filteredReccArray: state.reccArray.filter((r)=> r._id !== action.payload._id),
     }
+        case 'FILTER_RECCS': {
+            let newFilteredReccArray = [];
+            if (action.payload === '') {
+                newFilteredReccArray = state.reccArray;
+            } else {
+                state.reccArray.forEach((r) => {
+                    if (r.ARCcode === parseInt(action.payload)) {
+                        newFilteredReccArray.push(r);
+                    }
+                });
+            }
+
+            return {
+                reccArray: state.reccArray,
+                filteredReccArray: newFilteredReccArray,
+            }
+        }
         default:
             return state;
     }
@@ -25,7 +50,7 @@ export const reccReducer = (state, action) => {
 
 export const ReccContextProvider = ({ children }) => {
 
-    const [state, dispatch] = useReducer( reccReducer, { routes: null });
+    const [state, dispatch] = useReducer( reccReducer, initialState);
 
     return (
         <ReccContext.Provider value={{...state, dispatch}}>
