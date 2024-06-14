@@ -1,4 +1,3 @@
-import { useReccContext } from '../hooks/useReccContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const ReccDetails = ({ result }) => {

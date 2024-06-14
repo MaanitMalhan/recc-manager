@@ -8,14 +8,9 @@ export default function InputBox() {
     
     const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState('');
-    const [reccId, setReccId] = useState('');
-    const [error, setError] = useState(null);
-    const [ARCcode, setARCcode] = useState('');
-    const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
-    const [template, setTemplate] = useState('');
+ 
 
-    const { dispatch} = useReccContext();
+    const { dispatch } = useReccContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,6 +42,7 @@ export default function InputBox() {
         <p className='input-text'>ARC Code Entered: <span className='output-text'>{inputValue}</span></p>
         <p className='input-text'>Result:  <span className='output-text'>{result}</span></p>
         <button className='input-text' onClick={ handleSubmit }>Submit</button>
+        <button className='input-text' onClick={ () => window.location.reload(false) }>Reset</button>
       </div>
     );
   }

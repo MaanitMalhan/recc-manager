@@ -31,7 +31,7 @@ export const reccReducer = (state, action) => {
                 newFilteredReccArray = state.reccArray;
             } else {
                 state.reccArray.forEach((r) => {
-                    if (r.ARCcode === parseInt(action.payload)) {
+                    if (r.ARCcode === parseFloat(action.payload)) {
                         newFilteredReccArray.push(r);
                     }
                 });
