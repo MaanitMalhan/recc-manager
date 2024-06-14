@@ -3,22 +3,23 @@
 
 /* Layout */
 :root {
-  --primary: rgb(126, 169, 80);
-  --error: rgb(40, 80, 150);
+  --primary: #182A60;
+  --error: #FFFFFF;
 }
 
 body {
-  background: #f1f1f1;
+  background: #fafafa;
   margin: 0;
   font-family: "Varela Round", sans-serif;
 }
 
 header {
-  background: #fff;
+  background: #182A60;
   display: flex;
   align-items: center;
   padding: 10px 20px;
   font-family: "Varela Round", sans-serif;
+  color: #FFFFFF;
 }
 
 header .container {
@@ -166,7 +167,7 @@ input.error {
 
 /* Header Image */
 .header-img {
-  width: 200px;
+  width: 150px;
   height: auto;
   margin-right: 100px;
 }
