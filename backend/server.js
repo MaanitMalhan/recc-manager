@@ -3,7 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const reccRoutes = require('./routes/Routes');
+const reccRoutes = require('./routes/routes');
 
 //creates express app
 const app = express();
