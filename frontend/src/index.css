@@ -201,3 +201,10 @@ button.input-text {
   vertical-align: middle;
 }
 
+.edit-icon {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 8%;
+}
+

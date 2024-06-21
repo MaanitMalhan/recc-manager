@@ -2,6 +2,7 @@ import { useReccContext } from '../hooks/useReccContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const ReccDetails = ({ recc }) => {
+    const iconClassName = "edit-icon material-symbols-outlined"
 
     const { dispatch } = useReccContext()
 
@@ -25,6 +26,7 @@ const ReccDetails = ({ recc }) => {
             <p><strong>Report Name: </strong>{recc.reportName}</p>
             <p><strong>Last Updated: </strong>{formatDistanceToNow(new Date(recc.updatedAt), {addSuffix: true})}</p>
             <span onClick={handleClick} className="material-symbols-outlined">Delete</span>
+            <span className={ iconClassName }>Edit</span>
         </div>
     );
 }
