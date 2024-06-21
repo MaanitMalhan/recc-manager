@@ -1,5 +1,3 @@
-//FIGURE OUT HOW TO USE ARC CODES AS ID 
-
 const Recc = require('../models/reccModel');
 const mongoose = require('mongoose');
 
@@ -10,23 +8,23 @@ const getReccs = async (req, res) => {
     res.status(200).json(reccs)
 };
 
-//get a single rec - HAS ERROR
-const getRecc = async (req, res) => {
-    //grab id from params
-    const {id} = req.params
+// //get a single rec 
+// const getRecc = async (req, res) => {
+//     //grab id from params
+//     const {id} = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: `not a valid database id: ${id}`})
-    }
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//         return res.status(404).json({error: `not a valid database id: ${id}`})
+//     }
 
-    const recc = await Recc.findById(id)
-    if (!recc) {
-       return res.status(404).json({error: `No recc in database with id: ${id}`})
-    }
-    //if recc is found
-    res.status(200).json(recc)
+//     const recc = await Recc.findById(id)
+//     if (!recc) {
+//        return res.status(404).json({error: `No recc in database with id: ${id}`})
+//     }
+//     //if recc is found
+//     res.status(200).json(recc)
     
-};
+// };
 
 //create a rec
 const createRecc = async (req, res) => {
@@ -82,24 +80,31 @@ const deleteRecc = async (req, res) => {
 
 //update a rec
 const updateRecc = async (req, res) => {
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: `not a valid database id: ${id}`})
+    
+    try {
+        // Find the existing document by ID
+        let recc = await Recc.findById(reccId);
+    
+        if (!recc) {
+          throw new Error('Recc not found'); // Handle case where recc is not found
+        }
+    
+        // Update fields
+        recc.ARCcode = updatedFields.ARCcode || recc.ARCcode;
+        recc.location = updatedFields.location || recc.location;
+        recc.description = updatedFields.description || recc.description;
+        recc.template = updatedFields.template || recc.template;
+        recc.reportName = updatedFields.reportName || recc.reportName;
+    
+        // Save the updated document
+        await recc.save();
+        console.log('Recc updated successfully');
+      } catch (err) {
+        console.error('Error updating recc:', err.message);
+      }
     }
 
-    const recc = await Recc.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-
-    if (!recc) {
-        return res.status(404).json({error: `No recc in database with id: ${id}`})
-    }
-
-    res.status(200).json({message: `Recc with id: ${id} updated`})
-
-}
-
+    
 module.exports = {
     createRecc,
     getReccs,

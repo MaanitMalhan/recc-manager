@@ -75,14 +75,15 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-
-.reccs{
-  overflow:hidden; 
-  overflow-y:scroll;
-  height: 300px;
-  position:absolute;
-  width: 1000px;
-  margin-top:200px;
+/* recc details */
+.reccs {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 300px; /* Set a maximum height */
+  position: absolute;
+  width: 70%; /* Use full width of the parent container */
+  max-width: 1000px; /* Set a maximum width */
+  margin-top: 200px;
 }
 
 .recc-details {
@@ -92,6 +93,8 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  width: 100%; /* Ensure the details container fills the .reccs div */
+  box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .recc-details h4 {
