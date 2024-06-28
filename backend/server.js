@@ -4,12 +4,14 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const reccRoutes = require('./routes/routes');
+const userRoutes = require('./routes/user');
 
 //creates express app
 const app = express();
 
 //middleware
 app.use(express.json());
+
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
@@ -18,6 +20,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/api/reccs",reccRoutes);
+app.use("/api/user", userRoutes);
 
 
 //connect to DB

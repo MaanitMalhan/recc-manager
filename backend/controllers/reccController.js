@@ -9,22 +9,22 @@ const getReccs = async (req, res) => {
 };
 
 // //get a single rec 
-// const getRecc = async (req, res) => {
-//     //grab id from params
-//     const {id} = req.params
+ const getRecc = async (req, res) => {
+     //grab id from params
+     const {id} = req.params
 
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//         return res.status(404).json({error: `not a valid database id: ${id}`})
-//     }
+     if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: `not a valid database id: ${id}`})
+     }
 
-//     const recc = await Recc.findById(id)
-//     if (!recc) {
-//        return res.status(404).json({error: `No recc in database with id: ${id}`})
-//     }
-//     //if recc is found
-//     res.status(200).json(recc)
+     const recc = await Recc.findById(id)
+     if (!recc) {
+        return res.status(404).json({error: `No recc in database with id: ${id}`})
+     }
+     //if recc is found
+     res.status(200).json(recc)
     
-// };
+ };
 
 //create a rec
 const createRecc = async (req, res) => {
@@ -80,29 +80,52 @@ const deleteRecc = async (req, res) => {
 
 //update a rec
 const updateRecc = async (req, res) => {
+    const { id } = req.params;
+    const { ARCcode, location, description, template, reportName } = req.body;
     
-    try {
-        // Find the existing document by ID
-        let recc = await Recc.findById(reccId);
-    
-        if (!recc) {
-          throw new Error('Recc not found'); // Handle case where recc is not found
-        }
-    
-        // Update fields
-        recc.ARCcode = updatedFields.ARCcode || recc.ARCcode;
-        recc.location = updatedFields.location || recc.location;
-        recc.description = updatedFields.description || recc.description;
-        recc.template = updatedFields.template || recc.template;
-        recc.reportName = updatedFields.reportName || recc.reportName;
-    
-        // Save the updated document
-        await recc.save();
-        console.log('Recc updated successfully');
-      } catch (err) {
-        console.error('Error updating recc:', err.message);
-      }
+    let emptyFields = [];
+
+    if (!ARCcode) {
+        emptyFields.push('ARCcode');
     }
+    if (!location) {
+        emptyFields.push('location');
+    }
+    if (!description) {
+        emptyFields.push('description');
+    }
+    if (!template) {
+        emptyFields.push('template');
+    }
+    if (!reportName) {
+        emptyFields.push('reportName');
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: `Please fill in the following fields: ${emptyFields.join(', ')}`, emptyFields });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: `Not a valid database id: ${id}` });
+    }
+
+    try {
+        const recc = await Recc.findOneAndUpdate(
+            { _id: id },
+            { $set: { ARCcode, location, description, template, reportName } },
+            { new: true, runValidators: true }
+        );
+
+        if (!recc) {
+            return res.status(404).json({ error: `No recc in database with id: ${id}` });
+        }
+
+        res.status(200).json({ message: `Recc with id: ${id} updated`, recc });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+    
 
     
 module.exports = {

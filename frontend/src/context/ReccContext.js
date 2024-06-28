@@ -40,8 +40,19 @@ export const reccReducer = (state, action) => {
             return {
                 reccArray: state.reccArray,
                 filteredReccArray: newFilteredReccArray,
+            }};
+            
+
+            case 'UPDATE_RECC':
+            return {
+                reccArray: state.reccArray.map((r) => 
+                    r._id === action.payload._id ? action.payload : r
+                ),
+                filteredReccArray: state.filteredReccArray.map((r) => 
+                    r._id === action.payload._id ? action.payload : r
+                ),
             }
-        }
+        
         default:
             return state;
     }

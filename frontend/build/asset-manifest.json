@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3d91e681.css",
+    "main.js": "/static/js/main.c876bef0.js",
+    "static/media/uconn_white.png": "/static/media/uconn_white.0e94aebbe0c97646d46e.png",
+    "index.html": "/index.html",
+    "main.3d91e681.css.map": "/static/css/main.3d91e681.css.map",
+    "main.c876bef0.js.map": "/static/js/main.c876bef0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d91e681.css",
+    "static/js/main.c876bef0.js"
+  ]
+}

@@ -1,56 +1,39 @@
-version: '3.7'
+version: "3"
 
 services:
-  server:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    image: myapp-backend
-    container_name: myapp-node-backend
-    command: /usr/src/app/node_modules/.bin/nodemon server.js
-    volumes:
-      - ./backend/:/usr/src/app
-      - /usr/src/app/node_modules
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+    
+  backend:
+    build: ./backend
+    container_name: nodejs-backend
+    restart: always
     ports:
       - "4000:4000"
+    stdin_open: true
+    tty: true
     depends_on:
-      - mongo
-    env_file: ./backend/.env
-    environment:
-      - NODE_ENV=development
+      - database
     networks:
-      - app-network
-  mongo:
+      - mern-network
+
+  database:
     image: mongo
-    volumes:
-      - data-volume:/data/db
+    container_name: mongo-db
     ports:
       - "27017:27017"
     networks:
-      - app-network
-  client:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    image: myapp-frontend
-    container_name: myapp-react-frontend
-    command: npm start
-    volumes:
-      - ./frontend/:/usr/app
-      - /usr/app/node_modules
-    depends_on:
-      - server
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-
+      - mern-network
+    
 networks:
-    app-network:
-        driver: bridge
-
-volumes:
-    data-volume:
-    node_modules:
-    web-root:
-      driver: local
+  mern-network:
+    driver: bridge

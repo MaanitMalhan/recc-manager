@@ -1,20 +1,13 @@
-#  Dockerfile for Node Express Backend
+FROM node:22-alpine
 
-FROM node:20-alpine
+WORKDIR /app
 
-# Create App Directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+COPY package.json ./
 
-# Install Dependencies
-COPY package*.json ./
+RUN npm install
 
-RUN npm install --silent
-
-# Copy app source code
 COPY . .
 
-# Exports
 EXPOSE 4000
 
-CMD ["npm","start"]
+CMD ["npm", "start"]
