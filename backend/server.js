@@ -1,5 +1,3 @@
-//FIGURE OUT HOW TO USE ARC CODES AS ID 
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
