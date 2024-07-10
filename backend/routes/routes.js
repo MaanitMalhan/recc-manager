@@ -1,8 +1,11 @@
 const express = require('express');
-const { createRecc, getRecc, getReccs, deleteRecc, updateRecc} = require('../controllers/reccController');
 
+const { createRecc, getRecc, getReccs, deleteRecc, updateRecc} = require('../controllers/reccController');
+const requireAuth = require('../middleware/requireAuth')
+//make sure to require the controller to protect routes
 const router = express.Router();
 
+router.use(requireAuth);
 //FIGURE OUT HOW TO USE ARC CODES AS ID 
 //=========================================================
     //routes

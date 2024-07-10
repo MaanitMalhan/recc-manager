@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useReccContext } from '../hooks/useReccContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const ReccForm = () => {
     const { dispatch } = useReccContext();
+    const { user } = useAuthContext();
+
     const [ARCcode, setARCcode] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
@@ -15,13 +18,21 @@ const ReccForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(!user){
+            setError('You must be logged in to use this website.')
+            return
+        }
+
         const recc = {ARCcode, location, description, template, reportName};
 
         const response = await fetch('/api/reccs', {
             method: 'POST',
             body: JSON.stringify(recc),
-            headers: {'Content-Type': 'application/json'}
-        })
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+              }
+            })
         const json = await response.json();
 
         if (!response.ok) {
@@ -37,7 +48,7 @@ const ReccForm = () => {
             setDescription('');
             setTemplate('');
             setReportName('');
-            console.log('Saved data:', recc); 
+           
             dispatch({type: 'CREATE_RECC', payload: json});
         }
         }

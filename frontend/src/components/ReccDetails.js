@@ -1,24 +1,25 @@
 import { useReccContext } from '../hooks/useReccContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const ReccDetails = ({ recc }) => {
-
-    const [ARCcode, setARCcode] = useState('');
-    const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
-    const [template, setTemplate] = useState('');
-    const [reportName, setReportName] = useState('');
-    const [error, setError] = useState(null);
-    const [emptyFields, setEmptyFields] = useState([]);
-
-
+    const { dispatch } = useReccContext();
+    const { user } = useAuthContext();
     const iconClassName = "edit-icon material-symbols-outlined"
 
-    const { dispatch } = useReccContext()
 
     const handleClick = async () => {
-        const response = await fetch('/api/reccs/' + recc._id, {method: "DELETE"}) // Delete the recommendation
+        // Delete the recommendation
+        if(!user){
+            return
+        }
+        const response = await fetch('/api/reccs/' + recc._id, {
+            method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    }) 
     
         const json = await response.json()
 
