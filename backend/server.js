@@ -20,7 +20,6 @@ app.use((req, res, next) => {
 app.use("/api/reccs",reccRoutes);
 app.use("/api/user", userRoutes);
 
-
 //connect to DB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
@@ -31,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI)
         })
     })
     .catch((err) => {
-        console.log(error);
+        console.log(err);
     })
 
 

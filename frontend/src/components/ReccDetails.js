@@ -27,12 +27,6 @@ const ReccDetails = ({ recc }) => {
             dispatch({ type: 'DELETE_RECC', payload: json })
         }
     }
-
-    const handleEdit = async (e) => {
-        
-       console.log("Edit button clicked")
-
-        }
     
 
     return (
@@ -44,7 +38,6 @@ const ReccDetails = ({ recc }) => {
             <p><strong>Report Name: </strong>{recc.reportName}</p>
             <p><strong>Last Updated: </strong>{formatDistanceToNow(new Date(recc.updatedAt), {addSuffix: true})}</p>
             <span onClick={handleClick} className="material-symbols-outlined">Delete</span>
-            <span onClick={handleEdit} className={ iconClassName }>Edit</span>
         </div>
     );
     }

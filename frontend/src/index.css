@@ -6,7 +6,7 @@
 /* Layout */
 :root {
   --primary: #182A60;
-  --error: #FFFFFF;
+  --error: #ff0000;
 }
 
 body {
@@ -225,7 +225,7 @@ nav button {
   font-family: "Varela Round", sans-serif;
   cursor: pointer;
   font-size: 1em;
-  margin-left: 10px;
+  margin-left: 10px; 
 }
 
 /* auth forms */
