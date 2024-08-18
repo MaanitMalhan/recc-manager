@@ -10,6 +10,7 @@ const Navbar = () => {
     const handleClick = () => {
         logout()
     }
+    
 
     return (
         <header className="header">
@@ -23,6 +24,7 @@ const Navbar = () => {
                 <div>
                     <span>{user.email}</span>
                     <button onClick={handleClick}>Log Out</button>
+                    <Link to= "/CSVpage">CSV page</Link>
                 </div>
             )}
             {!user && (
