@@ -18,10 +18,10 @@ const Navbar = () => {
         <img src={uconn_white}
         alt="UConn Logo" className='header-img'/>
         </a>
-        <h1>Southern New England Industrial Assessment Center Internal Tool</h1>
+        <h1 className='navHeading'>Southern New England Industrial Assessment Center Internal Tool</h1>
         <nav>
             {user &&(
-                <div>
+                <div className='userInfo'>
                     <span>{user.email}</span>
                     <button onClick={handleClick}>Log Out</button>
                     <Link to= "/CSVpage">CSV page</Link>

@@ -228,6 +228,14 @@ nav button {
   margin-left: 10px; 
 }
 
+.navHeading{
+    font-size: 160%;
+}
+
+.userInfo{
+  margin-left: 15%;
+}
+
 /* auth forms */
 form.signup, form.login {
   max-width: 400px;
@@ -236,3 +244,5 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
+
+/*CSV Page*/
