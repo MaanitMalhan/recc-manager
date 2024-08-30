@@ -14,6 +14,6 @@ RUN npm install
 
 # copy local files to app folder
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["npm","start"]
