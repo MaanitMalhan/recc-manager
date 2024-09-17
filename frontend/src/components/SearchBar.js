@@ -41,7 +41,7 @@ export default function InputBox() {
         />
         <p className='input-text'>ARC Code Entered: <span className='output-text'>{inputValue}</span></p>
         <p className='input-text'>Result:  <span className='output-text'>{result}</span></p>
-        <button className='input-text' onClick={ handleSubmit }>Submit</button>
+        <button className='input-text' onClick={ handleSubmit }>Search</button>
         <button className='input-text' onClick={ () => window.location.reload(false) }>Reset</button>
       </div>
     );

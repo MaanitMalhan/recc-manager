@@ -1,80 +1,72 @@
-import React, { useState } from 'react';
-import Papa from 'papaparse';
-import { Line } from 'react-chartjs-2';
-import 'chart.js/auto';  
+import React, { useState, useEffect } from 'react';
+import { parse } from 'csv-parse/browser/esm/sync';  // Import the synchronous parser
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-
-const CSVpage = () => {
+const CSVToGraph = () => {
   const [data, setData] = useState([]);
-  const [chartData, setChartData] = useState(null);
+  const [graphData, setGraphData] = useState([]);
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      console.log("file uploaded", file.name, file.size, file.type);
-      // Papa.parse(file, {
-      //   complete: (result) => {
-      //     setData(result.data);
-      //     generateChartData(result.data);
-      //   },
-      //   header: true,
-      };
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+
+    // Read the file content
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const text = e.target.result;
+
+      try {
+        // Parse CSV with csv-parse
+        const records = parse(text, {
+          columns: true,       // Use first row as headers
+          skip_empty_lines: true
+        });
+
+        // Format the data for Recharts
+        const formattedData = records.map((row) => ({
+          x: Number(row.x),
+          y: Number(row.y),
+        }));
+
+        setData(formattedData);
+      } catch (error) {
+        console.error("Error parsing the CSV file:", error);
+      }
+    };
+
+    reader.readAsText(file);  // Trigger file reading
+  };
+
+  // Update graph data when `data` is ready
+  useEffect(() => {
+    if (data.length > 0) {
+      setGraphData(data);
     }
-  ;
-
-  const generateChartData = (data) => {
-    const labels = data.map((row) => row[Object.keys(row)[0]]);
-    const values = data.map((row) => parseFloat(row[Object.keys(row)[1]]));
-
-    setChartData({
-      labels: labels,
-      datasets: [
-        {
-          label: 'Data',
-          data: values,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-        },
-      ],
-    });
-  };
-
-  const renderTable = () => {
-    if (data.length === 0) return null;
-
-    const headers = Object.keys(data[0]);
-    return (
-      <table>
-        <thead>
-          <tr>
-            {headers.map((header) => (
-              <th key={header}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              {headers.map((header) => (
-                <td key={header}>{row[header]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
+  }, [data]);
 
   return (
-    <div >
-      <h1>Upload CSV File</h1>
+    <div>
+      <h1>CSV to Graph</h1>
+      
+      {/* File upload */}
       <input type="file" accept=".csv" onChange={handleFileUpload} />
-      {/* {renderTable()}
-      {chartData && <Line data={chartData} />} */}
+      
+      {/* Render the graph */}
+      {graphData.length > 0 ? (
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={graphData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="x" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      ) : (
+        <p>Please upload a CSV file to display the graph.</p>
+      )}
     </div>
   );
 };
 
-
-// export default CSVpage;
+export default CSVToGraph;
