@@ -1,75 +1,48 @@
 # Recommendation Manager 
-This is a website created to help the Southern New England Industrial Assessment Center manage their recommendations and to act as a database that holds their templates for recommendations. 
+This is a website created to help the Southern New England Industrial Assessment Center manage their recommendations and to act as a database that holds their templates for recommendations. The tech stack used for this website is MERN. The website is virtualized in docker for deployment. 
 
-# Getting Started with Create React App
+# Guide and Explanation
+Everything below is a guide for people contributing to the project. It should explain everything in detail.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Frontend
+Everything we will be working with is in the `frontend/src` folder. 
 
-## Available Scripts
+1. The `Asset` folder has all the images used to style the website. As a note all styling is specified by UConn guidelines or they will deny deployment on their server. 
 
-In the project directory, you can run:
+2. The next folder is `components` If you have familiarity with React you should understand this. But just to explain it components are individual smaller parts of React frontends that help make up the whole website. 
+    - The `Navbar.js` file is the header of the website holding the title and links to other pages on the website. 
+    - The `ReccDetails.js` file holds the individual blocks shown on the home page that show all the template data.
+    - The `ReccForm.js` file is where the employees can add templates which will be shown in the blocks from `ReccDetails.js`.
+    - The `SearchBar.js` file is just the search bar, it is essentially a filter on the frontend, so the backend does not get overloaded with requests there is also hardcoded ARC codes to speed up finding details on codes not inputted into the database. 
+    - The `SearchResults.js` file is supplementary to the `SearchBar.js` it returns the results from search.
 
-### `npm start`
+3. The `Context` folder is files of react context.
+    - The `AuthContext.js` file manages context for whether a user is logged in or out, and what information a user has access to. 
+    - The `ReactContext.js` file manages the context of the home page. It is the reason why new recommendation templates are shown as soon as they are added. 
 
-Runs the app in the development mode.\
-Open [http://localhost:433](http://localhost:433) to view it in your browser.
+4. The `Hooks` folder is files of react hooks.
+    - The `useAuthContext.js` and `useReccContext.js` these files simplify the process of accessing and using certain data.
+    - The `useLogin.js` and `useLogout.js` help handle updating whether a user is logged in or out. 
+    - The `useSignup.js` file is not used but left in case we wanted anyone to be able to sign up as a user and gain access to all the data. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+5. The `Pages` folder holds all the pages of the website.
 
-### `npm test`
+6. The `scripts` folder holder the hard mapping of the ARC codes, so people can look up ARC codes even if there is no template for them.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+7. The `App.js` file is handles all the pages. It also has left over code from the sign-up page which is deactivated for safety. 
 
-### `npm run build`
+8. The `index.css` file holds all the styling for the website. All styling must meet standards set by UConn. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+9. The `index.js` file renders and acts as the entry point for the entire web-application. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. The `Controller` folder holds files that explain the requirements for manipulating data. 
 
-### `npm run eject`
+2. The `middleware` folder makes sure that authentication is required for before users are given access to a website. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. The `models` folder holds the mongoDB schemas. Which defines how the data will be structured before being sent to the database. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. The `routes` folder holds the internal routes used by the data for things like adding and deleting things from the database. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
+5. The `server.js` file connects the webapp to the mongoDB server. 
