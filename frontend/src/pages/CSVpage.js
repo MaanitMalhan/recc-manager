@@ -8,33 +8,45 @@ const CSVToGraph = () => {
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
-
+  
     // Read the file content
     const reader = new FileReader();
     reader.onload = function (e) {
       const text = e.target.result;
-
+  
+      // Log the first few lines of the raw CSV text to inspect the format
+  
+      // Clean up the text if needed
+      const cleanedText = text.split('\n').slice(1).join('\n'); // Skip the first line
+  
       try {
-        // Parse CSV with csv-parse
-        const records = parse(text, {
+        // Parse CSV with csv-parse using a custom delimiter
+        const records = parse(cleanedText, {
           columns: true,       // Use first row as headers
-          skip_empty_lines: true
+          skip_empty_lines: true,
+          trim: true,         // Trim whitespace from both ends of fields
         });
-
-        // Format the data for Recharts
-        const formattedData = records.map((row) => ({
-          x: Number(row.x),
-          y: Number(row.y),
-        }));
-
+  
+  
+        // Find relevant columns for x and y
+        const formattedData = records
+          .filter(row => row['Date Time, GMT-04:00'] && row['AC Curr, Amps (LGR S/N: 21471721, SEN S/N: 21471721, LBL: CT1)']) // Ensure these columns exist
+          .map((row) => {
+            const xValue = new Date(row['Date Time, GMT-04:00']).getTime(); // Convert to a timestamp for the x-axis
+            const yValue = Number(row['AC Curr, Amps (LGR S/N: 21471721, SEN S/N: 21471721, LBL: CT1)']); // Assuming this is the y-value
+            return { x: xValue, y: yValue };
+          })
+          .filter(row => !isNaN(row.y)); // Filter out rows where y is not a number
+  
         setData(formattedData);
       } catch (error) {
         console.error("Error parsing the CSV file:", error);
       }
     };
-
+  
     reader.readAsText(file);  // Trigger file reading
   };
+  
 
   // Update graph data when `data` is ready
   useEffect(() => {
