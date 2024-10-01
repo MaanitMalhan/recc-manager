@@ -13,9 +13,7 @@ const CSVToGraph = () => {
     const reader = new FileReader();
     reader.onload = function (e) {
       const text = e.target.result;
-  
-      // Log the first few lines of the raw CSV text to inspect the format
-  
+    
       // Clean up the text if needed
       const cleanedText = text.split('\n').slice(1).join('\n'); // Skip the first line
   
@@ -44,7 +42,7 @@ const CSVToGraph = () => {
       }
     };
   
-    reader.readAsText(file);  // Trigger file reading
+    reader.readAsText(file); 
   };
   
 
