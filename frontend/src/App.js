@@ -6,6 +6,7 @@ import Login from './pages/Login'
 //import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import CSVpage from './pages/CSVpage'
+import Adminpage from './pages/Adminpage'
 
 function App() {
   const { user } = useAuthContext()
@@ -27,6 +28,10 @@ function App() {
               path="/signup" 
               element={!user ? <Signup /> : <Navigate to="/" />} 
             /> */}
+             <Route 
+              path="/adminpage"
+              element={!user ? <Adminpage /> : <Navigate to="/adminpage" />}
+            /> 
             <Route 
               path="/CSVpage"
               element={user ? <CSVpage /> : <Navigate to="/CSVpage" />}
